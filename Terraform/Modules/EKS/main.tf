@@ -50,6 +50,9 @@ resource "aws_iam_role" "Cluster_Role" {
       },
     ]
   })
+  tags = {
+  tag-key = "eks_cluster-role"
+}
 }
 
 resource "aws_iam_role_policy_attachment" "Cluster_AmazonEKSClusterPolicy" {

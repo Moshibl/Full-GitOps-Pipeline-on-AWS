@@ -1,20 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: myapp
   name: myapp
-  namespace: app
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: myapp
+  strategy: {}
   template:
     metadata:
       labels:
         app: myapp
     spec:
       containers:
-      - name: myapp
-        image: mohamedshibl/myapp
-        ports:
-        - containerPort: 80
+      - image: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:latest
+        name: myapp
+        resources: {}
+status: {}
