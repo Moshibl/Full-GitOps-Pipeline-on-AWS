@@ -15,3 +15,8 @@ rbac:
 serviceAccount:
   create: true
   name: argocd-image-updater
+  annotations: {
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds,
+    argocd-image-updater.argoproj.io/image-list: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:latest,
+    argocd-image-updater.argoproj.io/myapp.update-strategy: latest,
+  }
