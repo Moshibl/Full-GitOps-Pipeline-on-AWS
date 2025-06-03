@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr
+        image: mohamedshibl/myapp
         ports:
         - containerPort: 80
