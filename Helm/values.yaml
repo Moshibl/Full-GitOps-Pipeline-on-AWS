@@ -1,0 +1,17 @@
+config:
+  logLevel: debug
+
+  registries:
+    - name: AmazonECR
+      api_url: 588738579508.dkr.ecr.us-east-1.amazonaws.com
+      prefix: 588738579508.dkr.ecr.us-east-1.amazonaws.com
+      ping: yes
+      insecure: no
+      credentials: ecr
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: argocd-image-updater
