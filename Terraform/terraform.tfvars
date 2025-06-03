@@ -1,5 +1,5 @@
 region           = "us-east-1"
-ECR_Name         = "GitOps_ECR"
+ECR_Name         = "gitops-ecr"
 Network_VPC_Name = "EKS_VPC"
 Network_VPC_CIDR = "10.0.0.0/16"
 Public_Subnets = {
