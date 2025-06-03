@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: app
+  annotations:
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd-image-updater/git-creds
+    argocd-image-updater.argoproj.io/image-list: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr
+    argocd-image-updater.argoproj.io/myapp.update-strategy: latest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr
+        ports:
+        - containerPort: 80
