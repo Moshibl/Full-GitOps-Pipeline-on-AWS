@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:v2.5
