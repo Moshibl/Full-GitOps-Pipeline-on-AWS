@@ -1,13 +1,14 @@
-config:
-  logLevel: debug
+# config:
+#   logLevel: debug
 
-  registries:
-    - name: AmazonECR
-      api_url: 588738579508.dkr.ecr.us-east-1.amazonaws.com
-      prefix: 588738579508.dkr.ecr.us-east-1.amazonaws.com
-      ping: yes
-      insecure: no
-      credentials: ecr
+#   registries:
+#     - name: AmazonECR
+#       api_url: https://588738579508.dkr.ecr.us-east-1.amazonaws.com
+#       prefix: "588738579508.dkr.ecr.us-east-1.amazonaws.com"
+#       ping: yes
+#       default: true
+#       insecure: no
+#       credentials: argocd/ecr-secret
 
 rbac:
   create: true
@@ -15,8 +16,27 @@ rbac:
 serviceAccount:
   create: true
   name: argocd-image-updater
-  annotations: {
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds,
-    argocd-image-updater.argoproj.io/image-list: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:latest,
-    argocd-image-updater.argoproj.io/myapp.update-strategy: latest,
-  }
+  # annotations: {
+  #   argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds,
+  #   argocd-image-updater.argoproj.io/image-list: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:latest,
+  #   argocd-image-updater.argoproj.io/myapp.update-strategy: latest,
+  # }
+
+config:
+  registries:
+    - name: ECR
+      api_url: https://588738579508.dkr.ecr.us-east-1.amazonaws.com
+      prefix: "588738579508.dkr.ecr.us-east-1.amazonaws.com"
+      ping: yes
+      default: true
+      insecure: false
+      credentials: ext:/scripts/ecr-login.sh
+      credsexpire: 1h
+
+authScripts:
+  enabled: true
+  scripts:
+    ecr-login.sh: |
+      #!/bin/sh
+      export HOME=/tmp
+      aws ecr --region "us-east-1" get-authorization-token --output text --query 'authorizationData[].authorizationToken' | base64 -d

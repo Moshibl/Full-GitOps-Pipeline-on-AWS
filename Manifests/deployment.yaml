@@ -16,7 +16,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - image: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:latest
+      - image: 588738579508.dkr.ecr.us-east-1.amazonaws.com/gitops-ecr:2.4
         name: myapp
         resources: {}
 status: {}
